@@ -3,15 +3,15 @@ const PROJECTS = [
     id:1, 
     title:'E‑Learning Platform (LMS)', 
     desc:'Platform LMS untuk 20.000 pengguna', 
-    img:'/images/project-lms.png', 
-    tech:['React','Node.js'] 
+    img:'/pic/project/bangkom.png', 
+    tech:['Javascript','Node.js','TypeScript', 'Git', 'Tailwind CSS'] 
   },
   { 
     id:2, 
     title:'Dashboard Keuangan', 
     desc:'Dashboard reporting', 
-    img:'/images/project-dashboard.png', 
-    tech:['Next.js','Chart.js'] 
+    img:'/pic/project/epantau.png', 
+    tech:['Next.js','Express.js', 'Python'] 
   }
 ]
 
