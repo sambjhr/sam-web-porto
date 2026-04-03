@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 type ExpItem = {
   id: number;
   logo: string;      // path ke image di public/
@@ -11,49 +15,68 @@ const EXPERIENCES: ExpItem[] = [
   {
     id: 1,
     logo: "/pic/2.png",
-    role: "Sr. Frontend Developer",
-    company: "Upwork",
-    period: "Nov 2021 - Present",
+    role: "Financial and Policy Analyst",
+    company: "BKPSDM Pemerintah Kabupaten Kutai Kartanegara",
+    period: "Jun 2024 - Present",
     bullets: [
-      "Membangun UI responsif dan performa tinggi untuk aplikasi klien.",
-      "Optimisasi bundle, lazy-loading, dan code-splitting.",
-      "Menulis dokumentasi dan melakukan code review."
-    ]
+      "Developed and coordinated strategic planning, budgeting, and performance documents aligned with institutional targets and regulations.",
+      "Conducted institutional performance evaluations and prepared key outputs: performance reports, financial statements, and follow-ups to external audit findings.",
+      "Monitored budget allocation vs realization, performed variance analysis, and coordinated with units to validate financial utilization."
+    ],
   },
   {
     id: 2,
     logo: "/pic/2.png",
-    role: "Team Lead",
-    company: "Upwork",
-    period: "Jul 2017 - Oct 2021",
+    role: "Education Facilitator",
+    company: "BKPSDM Kutai Kartanegara (with Ministry of Communication and Digital Affairs)",
+    period: "Apr 2024 - Present",
     bullets: [
-      "Memimpin tim 4-6 engineer untuk beberapa proyek klien.",
-      "Mentoring, arsitektur, dan proses deployment.",
-      "Meningkatkan kecepatan release melalui CI/CD."
-    ]
+      "Delivered structured and ad hoc digital training for civil servants through the Government Transformation Academy program.",
+      "Facilitated around 72 classes with approximately 2,500 participants.",
+      "Covered Excel, Microsoft Office, Power Query, and Looker Studio for data processing and visualization."
+    ],
   },
   {
     id: 3,
     logo: "/pic/2.png",
-    role: "Full Stack Developer",
-    company: "Upwork",
-    period: "Dec 2015 - May 2017",
+    role: "Financial Verifier",
+    company: "Dinas Sosial Pemerintah Kabupaten Kutai Kartanegara",
+    period: "Jan 2022 - Jun 2024",
     bullets: [
-      "Mengembangkan fitur end-to-end (React + Node).",
-      "Membangun API, integrasi database, dan pengujian."
-    ]
-  }
+      "Planned and implemented budget verification processes to support effective resource allocation.",
+      "Analyzed financial data and prepared consolidated reports for internal and external stakeholders."
+    ],
+  },
+  {
+    id: 4,
+    logo: "/pic/2.png",
+    role: "Accountant Intern",
+    company: "Lembaga National Single Window - Ministry of Finance RI",
+    period: "Feb 2021 - Apr 2021",
+    bullets: [
+      "Prepared and organized financial disbursement documentation.",
+      "Researched institutional work processes and proposed improvement recommendations."
+    ],
+  },
 ];
 
 export default function Experience() {
+  const CARDS_PER_PAGE = 2;
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(EXPERIENCES.length / CARDS_PER_PAGE);
+
+  const startIndex = (currentPage - 1) * CARDS_PER_PAGE;
+  const paginatedExperiences = EXPERIENCES.slice(startIndex, startIndex + CARDS_PER_PAGE);
+  const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
+
   return (
     <div id="experience" className="mt-12">
-      <div className="max-w-5xl mx-auto px-6 text-center">
-        <span className="text-3xl text-slate-300">Experience</span>
-        <h3 className="mt-6 text-xl md:text-2xl font-semibold text-slate-100">Here is a quick summary of my most recent experiences:</h3>
+      <div className="text-center">
+        <span className="text-gr-title text-slate-300">Experience</span>
+        <h3 className="mt-6 text-gr-subtitle font-semibold text-slate-100">Here is a quick summary of my most recent experiences:</h3>
 
         <div className="mt-8 space-y-8">
-          {EXPERIENCES.map(exp => (
+          {paginatedExperiences.map((exp) => (
             <article
               key={exp.id}
               className="relative rounded-xl bg-[#0b1220] border border-slate-800 shadow-lg shadow-black/40 p-6 md:p-8"
@@ -69,23 +92,64 @@ export default function Experience() {
                 {/* Middle: role and bullets */}
                 <div className="col-span-12 md:col-span-8">
                   <div className="flex items-start justify-between md:items-center">
-                    <h4 className="text-lg md:text-xl font-semibold text-slate-100">{exp.role}</h4>
+                    <div className="text-left">
+                      <h4 className="text-gr-subtitle font-semibold text-slate-100">{exp.role}</h4>
+                      {exp.company && <p className="text-gr-small text-slate-400 mt-1">{exp.company}</p>}
+                    </div>
                     {/* for small screens the period moves below; for md+ it's at right */}
-                    <p className="text-sm text-slate-400 md:hidden mt-2">{exp.period}</p>
+                    <p className="text-gr-small text-slate-400 md:hidden mt-2">{exp.period}</p>
                   </div>
 
-                  <ul className="mt-3 text-slate-300 list-disc list-inside space-y-2 text-left md:text-left">
-                    {exp.bullets.map((b, i) => <li key={i} className="text-sm leading-relaxed">{b}</li>)}
+                  <ul className="mt-3 text-slate-300 list-disc list-outside pl-5 space-y-2 text-left">
+                    {exp.bullets.map((b, i) => <li key={i} className="text-gr-small">{b}</li>)}
                   </ul>
                 </div>
 
                 {/* Right: period (visible on md+) */}
                 <div className="hidden md:flex col-span-12 md:col-span-2 items-start justify-end">
-                  <p className="text-sm text-slate-400">{exp.period}</p>
+                  <p className="text-gr-small text-slate-400">{exp.period}</p>
                 </div>
               </div>
             </article>
           ))}
+        </div>
+
+        <div className="mt-8 flex items-center justify-center gap-3">
+          <button
+            type="button"
+            onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+            disabled={currentPage === 1}
+            className="h-10 w-10 flex items-center justify-center text-2xl text-slate-400 disabled:opacity-35 disabled:cursor-not-allowed hover:text-slate-200 transition"
+            aria-label="Previous page"
+          >
+            ←
+          </button>
+
+          {pageNumbers.map((page) => (
+            <button
+              key={page}
+              type="button"
+              onClick={() => setCurrentPage(page)}
+              aria-label={`Go to page ${page}`}
+              className={`h-10 w-10 flex items-center justify-center rounded-full text-gr-small transition ${
+                currentPage === page
+                  ? "bg-[#1f2742] text-white font-semibold"
+                  : "text-slate-400 hover:text-slate-200"
+              }`}
+            >
+              {page}
+            </button>
+          ))}
+
+          <button
+            type="button"
+            onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+            disabled={currentPage === totalPages}
+            className="h-10 w-10 flex items-center justify-center text-2xl text-slate-400 disabled:opacity-35 disabled:cursor-not-allowed hover:text-slate-200 transition"
+            aria-label="Next page"
+          >
+            →
+          </button>
         </div>
       </div>
     </div>

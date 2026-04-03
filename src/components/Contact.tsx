@@ -6,37 +6,27 @@ import { Mail, Phone } from "lucide-react";
 export default function Contact() {
   const email = "sambjhr.work@gmail.com";
   const phone = "+62 812-8101-5918";
+  const waNumber = "6281281015918";
 
-  // form state (simple)
   const [name, setName] = useState("");
-  const [fromEmail, setFromEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [status, setStatus] = useState<null | "idle" | "sending" | "sent" | "error">(null);
 
-  async function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setStatus("sending");
+    const text = `Halo Samuel, Saya ${name.trim()}\n${message.trim()}`;
+    const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
 
-    // ---- MOCK / client-side only behavior ----
-    // Replace this with EmailJS / serverless function as needed.
-    try {
-      // simulate async send
-      await new Promise((res) => setTimeout(res, 900));
-      setStatus("sent");
-      setName("");
-      setFromEmail("");
-      setMessage("");
-    } catch (err) {
-      setStatus("error");
-    }
+    window.open(waUrl, "_blank", "noopener,noreferrer");
+    setName("");
+    setMessage("");
   }
 
   return (
     <div id="contact" className="mt-12 mb-24 flex justify-center">
       <div className="w-full max-w-lg">
         <div className="text-center mb-6">
-          <p className="text-3xl text-slate-300 font-medium">Get in touch</p>
-          <h4 className="mt-4 text-lg md:text-xl font-semibold text-slate-100">
+          <p className="text-gr-title text-slate-300 font-medium">Get in touch</p>
+          <h4 className="mt-4 text-gr-subtitle font-semibold text-slate-100">
             What's next? Feel free to reach out to me if you're looking for a developer,
             have a query, or simply want to connect.
           </h4>
@@ -47,8 +37,9 @@ export default function Contact() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Name */}
             <div>
-              <label className="block text-center text-sm font-semibold text-slate-300 mb-2">Name</label>
+              <label htmlFor="contact-name" className="block text-center text-gr-small font-semibold text-slate-300 mb-2">Name</label>
               <input
+                id="contact-name"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -58,23 +49,11 @@ export default function Contact() {
               />
             </div>
 
-            {/* Email */}
-            <div>
-              <label className="block text-center text-sm font-semibold text-slate-300 mb-2">Email</label>
-              <input
-                type="email"
-                value={fromEmail}
-                onChange={(e) => setFromEmail(e.target.value)}
-                required
-                placeholder="you@example.com"
-                className="w-full bg-[#081018] border border-slate-700 rounded-md px-4 py-3 text-slate-100 outline-none focus:ring-2 focus:ring-emerald-500"
-              />
-            </div>
-
             {/* Message */}
             <div>
-              <label className="block text-center text-sm font-semibold text-slate-300 mb-2">Message</label>
+              <label htmlFor="contact-message" className="block text-center text-gr-small font-semibold text-slate-300 mb-2">Message</label>
               <textarea
+                id="contact-message"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 required
@@ -88,10 +67,9 @@ export default function Contact() {
             <div>
               <button
                 type="submit"
-                disabled={status === "sending"}
-                className="w-full bg-emerald-400 hover:bg-emerald-300 text-black font-semibold rounded-md py-3 transition"
+                className="w-full text-gr-small bg-emerald-400 hover:bg-emerald-300 text-black font-semibold rounded-md py-3 transition"
               >
-                {status === "sending" ? "Sending..." : "Send Message"}
+                Send Message
               </button>
             </div>
 
@@ -101,24 +79,16 @@ export default function Contact() {
                 <div className="p-2 rounded bg-[#071022] border border-slate-800">
                   <Mail size={18} />
                 </div>
-                <div className="text-sm">{email}</div>
+                <div className="text-gr-small">{email}</div>
               </div>
 
               <div className="flex items-center justify-center gap-3 mt-3">
                 <div className="p-2 rounded bg-[#071022] border border-slate-800">
                   <Phone size={18} />
                 </div>
-                <div className="text-sm">{phone}</div>
+                <div className="text-gr-small">{phone}</div>
               </div>
             </div>
-
-            {/* status message */}
-            {status === "sent" && (
-              <div className="text-center text-emerald-400 font-medium">Message sent — thank you!</div>
-            )}
-            {status === "error" && (
-              <div className="text-center text-rose-400 font-medium">Something went wrong. Try again.</div>
-            )}
           </form>
         </div>
       </div>

@@ -33,3 +33,36 @@ html, body, #root {
 body {
   @apply bg-[#0b0f17] text-slate-200 font-sans;
 }
+
+@layer utilities {
+  /* Golden-ratio modular scale (phi = 1.618) with responsive clamps */
+  .text-gr-hero {
+    font-size: clamp(2rem, 4.8vw, 2.618rem);
+    line-height: 1.15;
+  }
+
+  .text-gr-title {
+    font-size: clamp(1.4rem, 2.2vw, 1.618rem);
+    line-height: 1.2;
+  }
+
+  .text-gr-subtitle {
+    font-size: clamp(1.08rem, 1.5vw, 1.272rem);
+    line-height: 1.35;
+  }
+
+  .text-gr-body {
+    font-size: 1rem;
+    line-height: 1.62;
+  }
+
+  .text-gr-small {
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+
+  .text-gr-caption {
+    font-size: 0.786rem;
+    line-height: 1.35;
+  }
+}
