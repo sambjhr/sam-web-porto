@@ -1,64 +1,51 @@
-// src/components/Expertise.tsx
-
-const PROGRAMMING_SKILLS: { name: string; src: string; needsLightBg?: boolean }[] = [
-  { name: "JavaScript", src: "/pic/skill/javascrip.png" },
-  { name: "TypeScript", src: "/pic/skill/typescript.png" },
-  { name: "React", src: "/pic/skill/react.png" },
-  { name: "Next.js", src: "/pic/skill/nextjs.png", needsLightBg: true },
-  { name: "Express.js", src: "/pic/skill/expressjs.png", needsLightBg: true },
+const SKILLS: { name: string; src: string; whiteLogoBg?: boolean }[] = [
+  { name: "JavaScript", src: "/pic/skill/JavaScript.png" },
+  { name: "TypeScript", src: "/pic/skill/TypeScript.png" },
+  { name: "React", src: "/pic/skill/React.png" },
+  { name: "Next.js", src: "/pic/skill/nextjs-2.svg", whiteLogoBg: true },
+  { name: "Node.js", src: "/pic/skill/Node.js.png" },
+  { name: "Express", src: "/pic/skill/Express.png", whiteLogoBg: true },
+  { name: "PHP", src: "/pic/skill/PHP.png" },
   { name: "Python", src: "/pic/skill/python.png" },
-  { name: "Git & GitHub", src: "/pic/skill/git.png" },
-];
-
-const DATA_AND_TOOLS: string[] = [
-  "PostgreSQL",
-  "MySQL",
-  "Database Design",
-  "Database Query",
-  "Microsoft Office",
-  "Looker Studio",
-  "Project Management & Collaboration",
-  "Docker",
+  { name: "MySQL", src: "/pic/skill/MySQL.png" },
+  { name: "Git", src: "/pic/skill/Git.png" },
+  { name: "Docker", src: "/pic/skill/Docker.png" },
+  { name: "Tailwind CSS", src: "/pic/skill/Tailwind CSS.png" },
+  { name: "VS Code", src: "/pic/skill/Visual Studio Code (VS Code).png" },
 ];
 
 export default function Expertise() {
   return (
     <div id="skills" className="mx-auto mt-12 text-center py-4">
       <h3 className="text-gr-title font-semibold">Skills</h3>
-      <p className="text-gr-body text-slate-400 mt-2">
+      <p className="text-gr-body text-slate-400 mt-[13px]">
         Skills, tools, and technologies aligned with my CV profile:
       </p>
 
-      <div className="mt-8">
-        <h4 className="text-left text-gr-subtitle font-semibold text-slate-200">Programming</h4>
-        <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-8 gap-x-6 items-center justify-items-center">
-          {PROGRAMMING_SKILLS.map((item) => (
-            <div key={item.name} className="flex flex-col items-center justify-center">
-              <div
-                className={`flex items-center justify-center rounded-lg p-3 ${
-                  item.needsLightBg ? "bg-white" : ""
-                }`}
-              >
-                <img src={item.src} alt={item.name} className="w-16 h-16 md:w-20 md:h-20 object-contain" />
-              </div>
-              <div className="mt-3 text-gr-small text-slate-300">{item.name}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="mt-10">
-        <h4 className="text-left text-gr-subtitle font-semibold text-slate-200">Data & Tools</h4>
-        <div className="mt-4 flex flex-wrap gap-3 justify-start">
-          {DATA_AND_TOOLS.map((skill) => (
-            <span
-              key={skill}
-              className="px-3 py-1.5 rounded-full text-gr-small text-slate-200 bg-[#08122a] border border-slate-700"
+      <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+        {SKILLS.map((item, index) => (
+          <div
+            key={item.name}
+            className={`rounded-[13px] bg-[#1f232d] border-[1.6px] border-slate-700/55 px-[13px] py-[13px] flex flex-col items-center transition-all duration-300 ease-out hover:-translate-y-[3px] hover:shadow-[0_10px_24px_rgba(2,6,23,0.35)] ${
+              SKILLS.length % 5 === 3 && index === SKILLS.length - 3 ? "lg:col-start-2" : ""
+            }`}
+          >
+            <div
+              className={`w-[84px] h-[84px] rounded-[8px] flex items-center justify-center p-[8px] ${
+                item.whiteLogoBg ? "bg-white" : ""
+              }`}
             >
-              {skill}
-            </span>
-          ))}
-        </div>
+              <img
+                src={item.src}
+                alt={item.name}
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <div className="mt-[13px] text-gr-subtitle text-slate-100 text-center font-semibold">
+              {item.name}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

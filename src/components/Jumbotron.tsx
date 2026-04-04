@@ -1,7 +1,6 @@
 export default function Jumbotron(){
   const name = 'Samuel Haposan Banjarnahor'
   const title = 'Full-Stack Web Developer'
-  const email = 'sambjhr.work@gmail.com'
 
   return (
     <div className="grid md:grid-cols-3 gap-6 items-center" id="about">
@@ -10,8 +9,7 @@ export default function Jumbotron(){
         <p className="mt-4 text-gr-body text-slate-300 max-w-xl">{title} with a focus on creating digital experiences that are fast, accessible, visually appealing, and responsive.</p>
 
         <div className="mt-6 flex gap-3">
-          <a href="#projects" className="text-gr-small px-5 py-2 rounded-full bg-emerald-500 text-black font-medium">Project</a>
-          <a href={`mailto:${email}`} className="text-gr-small px-4 py-2 rounded-full border border-slate-700">Contact Me</a>
+          <a href="#projects" className="text-gr-small px-5 py-2 rounded-full bg-emerald-500 text-black font-medium transition-colors duration-300 hover:bg-emerald-400">Project</a>
         </div>
       </div>
 

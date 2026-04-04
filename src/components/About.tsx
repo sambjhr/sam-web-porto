@@ -12,13 +12,9 @@ export default function About() {
             </div>
         </div>
 
-        <div className="md:col-span-2 bg-[#071022] p-6 rounded-4xl shadow-inner">
-          <span className="inline-block px-3 py-1 rounded-full bg-[#1f2937] text-gr-small text-slate-300">
-            About me
-          </span>
-
-          <h2 className="mt-4 text-gr-title font-semibold text-slate-100">
-            Curious about me? Here you have it:
+        <div className="md:col-span-2 bg-[#0b1220] p-6 rounded-4xl shadow-inner border border-slate-700/45">
+          <h2 className="text-gr-title font-semibold text-slate-100">
+            Curious <span className="text-emerald-400">about me</span>? Here you have it:
           </h2>
 
           <div className="mt-4 text-gr-body text-slate-300 space-y-4">
@@ -49,7 +45,7 @@ export default function About() {
           </div>
 
           <div className="mt-6">
-            <h4 className="text-gr-subtitle font-semibold text-slate-200">Finally, some quick bits about me.</h4>
+            <h4 className="text-gr-subtitle font-semibold text-emerald-400">Finally, some quick bits about me.</h4>
 
             <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-4 text-gr-small text-slate-300">
               <ul className="list-disc list-outside pl-5 space-y-2">

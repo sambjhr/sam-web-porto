@@ -24,12 +24,12 @@ export default function Contact() {
   return (
     <div id="contact" className="mt-12 mb-24 flex justify-center">
       <div className="w-full max-w-lg">
-        <div className="text-center mb-6">
-          <p className="text-gr-title text-slate-300 font-medium">Get in touch</p>
-          <h4 className="mt-4 text-gr-subtitle font-semibold text-slate-100">
+        <div className="text-center mb-[21px]">
+          <h3 className="text-gr-title text-slate-300 font-semibold">Get in touch</h3>
+          <p className="mt-[13px] text-gr-body text-slate-400">
             What's next? Feel free to reach out to me if you're looking for a developer,
             have a query, or simply want to connect.
-          </h4>
+          </p>
         </div>
 
         {/* Card */}

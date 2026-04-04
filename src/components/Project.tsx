@@ -53,18 +53,25 @@ export default function Projects() {
   return (
     <div id="projects" className="mt-12">
       <h3 className="text-gr-title font-semibold text-center">Selected Projects</h3>
-      <div className="mt-6 grid gap-6">
-        {paginatedProjects.map((p) => (
-          <div key={p.id} className="p-4 bg-[#071022] rounded-xl border border-slate-800 grid md:grid-cols-3 gap-4">
-            <div className="md:col-span-1 flex items-center justify-center">
-              <img src={p.img} alt={p.title} className="w-full rounded-lg object-cover max-h-44" />
+      <p className="mt-[13px] text-gr-body text-slate-400 text-center">A curated selection of projects that represent my recent work.</p>
+      <div className="mt-[21px] grid gap-6">
+        {paginatedProjects.map((p, index) => (
+          <div
+            key={p.id}
+            className="px-[13px] py-[13px] bg-[#0b1220] rounded-[13px] border-[1.6px] border-slate-700/55 grid md:grid-cols-3 gap-[13px] transition-all duration-300 ease-out hover:-translate-y-[3px] hover:shadow-[0_12px_28px_rgba(2,6,23,0.4)]"
+          >
+            <div className={`md:col-span-1 flex items-center justify-center ${index % 2 === 1 ? "md:order-2" : "md:order-1"}`}>
+              <img src={p.img} alt={p.title} className="w-full rounded-[8px] object-cover max-h-44" />
             </div>
-            <div className="md:col-span-2">
-              <h4 className="font-semibold text-gr-subtitle">{p.title}</h4>
-              <p className="mt-2 text-gr-body text-slate-300">{p.desc}</p>
-              <div className="mt-3 flex gap-2 flex-wrap">
+            <div className={`md:col-span-2 flex flex-col justify-center gap-[13px] ${index % 2 === 1 ? "md:order-1" : "md:order-2"}`}>
+              <h4 className="font-semibold text-gr-subtitle text-emerald-400">{p.title}</h4>
+              <p className="text-gr-body text-slate-300">{p.desc}</p>
+              <div className="flex gap-[8px] flex-wrap">
                 {p.tech.map((t) => (
-                  <span key={`${p.id}-${t}`} className="px-2 py-1 text-gr-caption bg-[#08122a] rounded-full border border-slate-800">
+                  <span
+                    key={`${p.id}-${t}`}
+                    className="px-[8px] py-[5px] text-gr-caption bg-[#0b1220] rounded-full border border-slate-700/55"
+                  >
                     {t}
                   </span>
                 ))}
