@@ -50,7 +50,7 @@ export const PROJECTS: ProjectItem[] = [
       { name: "RBAC",        color: "violet" },
       { name: "Dashboard",   color: "slate"  },
     ],
-    url: "https://dev-bangkom.kukarkab.go.id",
+    url: "https://bangkom.kukarkab.go.id",
   },
   {
     id: 2,
