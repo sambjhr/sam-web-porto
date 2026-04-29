@@ -1,6 +1,6 @@
-// Import global CSS styles
 import './globals.css'
 import Navbar from '../components/Navbar'
+import { ThemeProvider } from '../components/ThemeProvider'
 
 export const metadata = {
   title: 'Samuel Portfolio',
@@ -9,10 +9,12 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body>
-        <Navbar />
-        <div className="pt-24">{children}</div>
+        <ThemeProvider>
+          <Navbar />
+          <div className="pt-10">{children}</div>
+        </ThemeProvider>
       </body>
     </html>
   )

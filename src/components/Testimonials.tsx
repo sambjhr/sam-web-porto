@@ -35,7 +35,7 @@ const TESTIMONIALS: TestimonialItem[] = [
   },
   {
     id: 4,
-    author: "Sekretaris Daerah Kabupaten Kutai Kartanegara",
+    author: "Sunggono - Sekretaris Daerah Kabupaten Kutai Kartanegara",
     quote:
       "Saya telah mengenal Samuel selama kurang lebih 4 (empat) tahun sejak 2022. Kami pertama kali bertemu di penerimaan CPNS baru di lingkungan Kabupaten Kutai Kartanegara sebagai salah satu mahasiswa dari PKN STAN. Saat itu saya menjabat sebagai Sekretaris Daerah. Sebagai PNS, Samuel telah menunjukkan integritas dan dedikasi tinggi dalam menjalankan tugasnya. Saya juga sering bertemu dengan Samuel di beberapa rapat dan pertemuan terkait perencanaan anggaran. Samuel terlihat menonjol karena selain menjadi yang paling muda di tempat rapat, Samuel bisa menyesuaikan dirinya dengan baik. Pada tahun 2023, saya bertemu lagi dengan Samuel yang mendapat surat rekomendasi pindah ke OIKN pada Kedeputian Transformasi Digital. Saat itu saya tahu Samuel memiliki bakat lebih dalam teknologi dan saya berpesan agar Samuel bisa melanjutkan studi terlebih dahulu serta membantu Kutai Kartanegara untuk mengembangkan ASN. Selain itu pada awal 2025, saya meminta Samuel beserta alumni STAN lainnya untuk membimbing anak-anak SMA agar bisa masuk ke PKN STAN. Menurut saya itu adalah sebuah pencapaian dan langkah awal untuk membenahi ASN di Kabupaten Kutai Kartanegara. Melihat kemampuannya, saya percaya bahwa Samuel layak memperoleh pendanaan dari LPDP.",
   },
@@ -53,15 +53,46 @@ const TESTIMONIALS: TestimonialItem[] = [
   },
 ];
 
+const AVATAR_PALETTE = [
+  "bg-emerald-500",
+  "bg-sky-500",
+  "bg-violet-500",
+  "bg-amber-500",
+  "bg-rose-500",
+  "bg-teal-500",
+  "bg-indigo-500",
+  "bg-orange-500",
+];
+
+function avatarColor(name: string): string {
+  let h = 0;
+  for (let i = 0; i < name.length; i++) h = name.charCodeAt(i) + ((h << 5) - h);
+  return AVATAR_PALETTE[Math.abs(h) % AVATAR_PALETTE.length];
+}
+
+function getInitial(name: string): string {
+  return name.trim()[0]?.toUpperCase() ?? "?";
+}
+
 export default function Testimonials() {
   const CARDS_PER_PAGE = 2;
   const [currentPage, setCurrentPage] = useState(1);
   const [expanded, setExpanded] = useState<Record<number, boolean>>({});
+  const [fading, setFading] = useState(false);
   const totalPages = Math.ceil(TESTIMONIALS.length / CARDS_PER_PAGE);
 
   const startIndex = (currentPage - 1) * CARDS_PER_PAGE;
   const paginatedTestimonials = TESTIMONIALS.slice(startIndex, startIndex + CARDS_PER_PAGE);
-  const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  const goToPage = (page: number) => {
+    if (page === currentPage) return;
+    setFading(true);
+    setTimeout(() => {
+      setCurrentPage(page);
+      setFading(false);
+    }, 180);
+  };
 
   const toggleExpanded = (id: number) => {
     setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -70,58 +101,87 @@ export default function Testimonials() {
   return (
     <div id="testimonials" className="mt-12">
       <h3 className="text-gr-title font-semibold text-center">What people say about me</h3>
-      <p className="mt-[13px] text-gr-body text-slate-400 text-center">
+      <span className="section-accent mt-2 mx-auto" />
+      <p className="mt-[13px] text-gr-body text-gray-500 dark:text-slate-400 text-center">
         Testimonials from mentors and colleagues I have worked with.
       </p>
 
-      <div className="mt-[21px] space-y-6">
-        {paginatedTestimonials.map((item) => {
-          const isExpanded = Boolean(expanded[item.id]);
-          const [namePart, rolePart] = item.author.split(" - ");
-          const hasRole = Boolean(rolePart);
+      <div
+        className={`mt-[21px] transition-opacity duration-[180ms] ${fading ? "opacity-0" : "opacity-100"}`}
+      >
+        <div key={currentPage} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {paginatedTestimonials.map((item, i) => {
+            const isExpanded = Boolean(expanded[item.id]);
+            const [namePart, rolePart] = item.author.split(" - ");
+            const hasRole = Boolean(rolePart);
+            const color = avatarColor(namePart);
 
-          return (
-            <article
-              key={item.id}
-              className="p-[21px] bg-[#0b1220] rounded-[13px] border-[1.6px] border-slate-700/55 text-slate-300 transition-all duration-300 ease-out hover:-translate-y-[3px] hover:shadow-[0_12px_28px_rgba(2,6,23,0.4)]"
-            >
-              {hasRole ? (
-                <div className="flex flex-wrap items-baseline gap-2">
-                  <p className="text-gr-subtitle font-semibold text-emerald-400">{namePart}</p>
-                  <p className="text-gr-small text-slate-300 italic">- {rolePart}</p>
+            return (
+              <article
+                key={item.id}
+                className={`stagger-card stagger-${i} relative flex flex-col p-[21px] bg-white dark:bg-[#0b1220] rounded-[13px] border-[1.6px] border-gray-200 dark:border-slate-700/55 text-gray-600 dark:text-slate-300 transition-all duration-300 ease-out hover:-translate-y-[3px] hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_12px_28px_rgba(2,6,23,0.4)]`}
+              >
+                {/* Decorative quote mark */}
+                <span
+                  className="absolute top-4 right-5 text-7xl leading-none font-serif text-emerald-400/20 dark:text-emerald-500/15 select-none pointer-events-none"
+                  aria-hidden="true"
+                >
+                  &ldquo;
+                </span>
+
+                {/* Author header */}
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`flex-shrink-0 w-10 h-10 rounded-full ${color} text-white flex items-center justify-center text-sm font-bold shadow-sm`}
+                  >
+                    {getInitial(namePart)}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-gr-subtitle font-semibold text-gray-800 dark:text-slate-100 truncate">
+                      {namePart}
+                    </p>
+                    {hasRole && (
+                      <span className="inline-flex items-center mt-0.5 px-2 py-0.5 rounded-full text-gr-caption bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 border border-emerald-200/70 dark:border-emerald-800/50 truncate max-w-full">
+                        {rolePart}
+                      </span>
+                    )}
+                  </div>
                 </div>
-              ) : (
-                <p className="text-gr-subtitle font-semibold text-slate-300 italic">{item.author}</p>
-              )}
 
-              <p
-                className={`mt-[13px] text-gr-body italic ${
-                  isExpanded
-                    ? ""
-                    : "overflow-hidden [display:-webkit-box] [-webkit-line-clamp:2] [-webkit-box-orient:vertical]"
-                }`}
-              >
-                "{item.quote}"
-              </p>
+                {/* Quote with fade + expand animation */}
+                <div className="relative mt-[13px] flex-1">
+                  <p
+                    className={`text-gr-body italic overflow-hidden transition-[max-height] duration-500 ease-in-out ${
+                      isExpanded ? "max-h-[1200px]" : "max-h-[3.24rem]"
+                    }`}
+                  >
+                    &ldquo;{item.quote}&rdquo;
+                  </p>
+                  {!isExpanded && (
+                    <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-white dark:from-[#0b1220] to-transparent pointer-events-none" />
+                  )}
+                </div>
 
-              <button
-                type="button"
-                onClick={() => toggleExpanded(item.id)}
-                className="mt-[8px] ml-auto block w-fit text-gr-small text-emerald-400 hover:text-emerald-300 transition-colors"
-              >
-                {isExpanded ? "Show less" : "Read all"}
-              </button>
-            </article>
-          );
-        })}
+                <button
+                  type="button"
+                  onClick={() => toggleExpanded(item.id)}
+                  className="mt-[10px] flex items-center gap-1 text-gr-small text-emerald-500 dark:text-emerald-400 hover:text-emerald-400 dark:hover:text-emerald-300 transition-colors"
+                >
+                  {isExpanded ? "Show less ↑" : "Read all ↓"}
+                </button>
+              </article>
+            );
+          })}
+        </div>
       </div>
 
-      <div className="mt-8 flex items-center justify-center gap-3">
+      {/* Pagination */}
+      <div className="mt-8 flex items-center justify-center gap-2">
         <button
           type="button"
-          onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+          onClick={() => goToPage(Math.max(1, currentPage - 1))}
           disabled={currentPage === 1}
-          className="h-10 w-10 flex items-center justify-center text-2xl text-slate-400 disabled:opacity-35 disabled:cursor-not-allowed hover:text-slate-200 transition"
+          className="h-10 w-10 flex items-center justify-center text-2xl text-gray-400 dark:text-slate-400 disabled:opacity-35 disabled:cursor-not-allowed hover:text-gray-700 dark:hover:text-slate-200 transition"
           aria-label="Previous page"
         >
           ←
@@ -131,12 +191,12 @@ export default function Testimonials() {
           <button
             key={page}
             type="button"
-            onClick={() => setCurrentPage(page)}
+            onClick={() => goToPage(page)}
             aria-label={`Go to page ${page}`}
-            className={`h-10 w-10 flex items-center justify-center rounded-full text-gr-small transition ${
+            className={`h-10 w-10 flex items-center justify-center rounded-full text-gr-small transition-all duration-200 ${
               currentPage === page
-                ? "bg-[#1f2742] text-white font-semibold"
-                : "text-slate-400 hover:text-slate-200"
+                ? "bg-emerald-500 text-white font-semibold shadow-md shadow-emerald-500/25"
+                : "text-gray-400 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-800"
             }`}
           >
             {page}
@@ -145,9 +205,9 @@ export default function Testimonials() {
 
         <button
           type="button"
-          onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+          onClick={() => goToPage(Math.min(totalPages, currentPage + 1))}
           disabled={currentPage === totalPages}
-          className="h-10 w-10 flex items-center justify-center text-2xl text-slate-400 disabled:opacity-35 disabled:cursor-not-allowed hover:text-slate-200 transition"
+          className="h-10 w-10 flex items-center justify-center text-2xl text-gray-400 dark:text-slate-400 disabled:opacity-35 disabled:cursor-not-allowed hover:text-gray-700 dark:hover:text-slate-200 transition"
           aria-label="Next page"
         >
           →

@@ -1,37 +1,41 @@
 @import "tailwindcss";
 
-/* :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-} */
-
+@custom-variant dark (&:where(.dark, .dark *));
 
 html, body, #root {
   height: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
 }
 
 body {
-  @apply bg-[#0b0f17] text-slate-200 font-sans;
+  @apply bg-gray-50 dark:bg-[#0b0f17] text-gray-900 dark:text-slate-200 font-sans;
+}
+
+/* ── Keyframe animations ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 14px 2px rgba(52, 211, 153, 0.10); }
+  50%       { box-shadow: 0 0 32px 10px rgba(52, 211, 153, 0.22); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 @layer utilities {
@@ -64,5 +68,54 @@ body {
   .text-gr-caption {
     font-size: 0.786rem;
     line-height: 1.35;
+  }
+
+  /* Animation utilities */
+  .animate-fade-in-up {
+    animation: fadeInUp 0.7s ease-out both;
+  }
+
+  .animate-fade-in-up-delay {
+    animation: fadeInUp 0.7s ease-out 0.2s both;
+  }
+
+  .animate-marquee {
+    animation: marquee 28s linear infinite;
+    will-change: transform;
+  }
+
+  .stagger-card {
+    animation: fadeInUp 0.45s ease-out var(--stagger-delay, 0ms) both;
+  }
+
+  .stagger-0  { --stagger-delay:   0ms; }
+  .stagger-1  { --stagger-delay:  55ms; }
+  .stagger-2  { --stagger-delay: 110ms; }
+  .stagger-3  { --stagger-delay: 165ms; }
+  .stagger-4  { --stagger-delay: 220ms; }
+  .stagger-5  { --stagger-delay: 275ms; }
+  .stagger-6  { --stagger-delay: 330ms; }
+  .stagger-7  { --stagger-delay: 385ms; }
+  .stagger-8  { --stagger-delay: 440ms; }
+  .stagger-9  { --stagger-delay: 495ms; }
+  .stagger-10 { --stagger-delay: 550ms; }
+  .stagger-11 { --stagger-delay: 605ms; }
+  .stagger-12 { --stagger-delay: 660ms; }
+
+  .cursor-blink {
+    animation: blink 1s step-end infinite;
+  }
+
+  .glow-ring {
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
+  /* Section heading accent bar */
+  .section-accent {
+    display: block;
+    width: 3rem;
+    height: 3px;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, #34d399, #10b981);
   }
 }

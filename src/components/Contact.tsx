@@ -25,19 +25,20 @@ export default function Contact() {
     <div id="contact" className="mt-12 mb-24 flex justify-center">
       <div className="w-full max-w-lg">
         <div className="text-center mb-[21px]">
-          <h3 className="text-gr-title text-slate-300 font-semibold">Get in touch</h3>
-          <p className="mt-[13px] text-gr-body text-slate-400">
+          <h3 className="text-gr-title text-gray-800 dark:text-slate-300 font-semibold">Get in touch</h3>
+          <span className="section-accent mt-2 mx-auto" />
+          <p className="mt-[13px] text-gr-body text-gray-500 dark:text-slate-400">
             What's next? Feel free to reach out to me if you're looking for a developer,
             have a query, or simply want to connect.
           </p>
         </div>
 
         {/* Card */}
-        <div className="bg-[#0d1114] border border-slate-800 rounded-2xl p-6 shadow-[0_10px_30px_rgba(2,6,23,0.6)]">
+        <div className="bg-white dark:bg-[#0d1114] border border-gray-200 dark:border-slate-800 rounded-2xl p-6 shadow-[0_10px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_10px_30px_rgba(2,6,23,0.6)]">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Name */}
             <div>
-              <label htmlFor="contact-name" className="block text-center text-gr-small font-semibold text-slate-300 mb-2">Name</label>
+              <label htmlFor="contact-name" className="block text-center text-gr-small font-semibold text-gray-700 dark:text-slate-300 mb-2">Name</label>
               <input
                 id="contact-name"
                 type="text"
@@ -45,13 +46,13 @@ export default function Contact() {
                 onChange={(e) => setName(e.target.value)}
                 required
                 placeholder="Your name"
-                className="w-full bg-[#081018] border border-slate-700 rounded-md px-4 py-3 text-slate-100 outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full bg-gray-50 dark:bg-[#081018] border border-gray-300 dark:border-slate-700 rounded-md px-4 py-3 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-600 outline-none focus:ring-2 focus:ring-emerald-500"
               />
             </div>
 
             {/* Message */}
             <div>
-              <label htmlFor="contact-message" className="block text-center text-gr-small font-semibold text-slate-300 mb-2">Message</label>
+              <label htmlFor="contact-message" className="block text-center text-gr-small font-semibold text-gray-700 dark:text-slate-300 mb-2">Message</label>
               <textarea
                 id="contact-message"
                 value={message}
@@ -59,7 +60,7 @@ export default function Contact() {
                 required
                 rows={6}
                 placeholder="Write your message..."
-                className="w-full bg-[#081018] border border-slate-700 rounded-md px-4 py-3 text-slate-100 outline-none resize-vertical focus:ring-2 focus:ring-emerald-500"
+                className="w-full bg-gray-50 dark:bg-[#081018] border border-gray-300 dark:border-slate-700 rounded-md px-4 py-3 text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-600 outline-none resize-vertical focus:ring-2 focus:ring-emerald-500"
               />
             </div>
 
@@ -73,17 +74,16 @@ export default function Contact() {
               </button>
             </div>
 
-            {/* optional contact quick info (matches your previous layout) */}
-            <div className="pt-3 border-t border-slate-800 mt-2 text-slate-300">
+            <div className="pt-3 border-t border-gray-200 dark:border-slate-800 mt-2 text-gray-600 dark:text-slate-300">
               <div className="flex items-center justify-center gap-3 mt-3">
-                <div className="p-2 rounded bg-[#071022] border border-slate-800">
+                <div className="p-2 rounded bg-gray-100 dark:bg-[#071022] border border-gray-200 dark:border-slate-800">
                   <Mail size={18} />
                 </div>
                 <div className="text-gr-small">{email}</div>
               </div>
 
               <div className="flex items-center justify-center gap-3 mt-3">
-                <div className="p-2 rounded bg-[#071022] border border-slate-800">
+                <div className="p-2 rounded bg-gray-100 dark:bg-[#071022] border border-gray-200 dark:border-slate-800">
                   <Phone size={18} />
                 </div>
                 <div className="text-gr-small">{phone}</div>
