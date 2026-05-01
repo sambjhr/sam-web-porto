@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
@@ -16,17 +17,21 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
   const { theme, toggle } = useTheme();
+  const pathname = usePathname();
 
   useEffect(() => {
-    const sectionIds = NAV_LINKS.map((l) => l.href.slice(1));
+    if (pathname !== "/") return;
+
     const observers: IntersectionObserver[] = [];
 
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id);
+    NAV_LINKS.forEach((link) => {
+      if (!link.href.includes("#")) return;
+      const sectionId = link.href.split("#")[1];
+      const el = document.getElementById(sectionId);
       if (!el) return;
       const obs = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id);
+          if (entry.isIntersecting) setActiveSection(sectionId);
         },
         { rootMargin: "-20% 0px -70% 0px" }
       );
@@ -35,7 +40,7 @@ export default function Navbar() {
     });
 
     return () => observers.forEach((o) => o.disconnect());
-  }, []);
+  }, [pathname]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-[100] flex items-center px-4 py-3 md:px-8">
@@ -55,14 +60,13 @@ export default function Navbar() {
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-0.5 text-gr-small" aria-label="Main navigation">
             {NAV_LINKS.map((link) => {
-              const isActive = activeSection === link.href.slice(1);
+              const isActive = link.href.includes("#")
+                ? pathname === "/" && activeSection === link.href.split("#")[1]
+                : pathname === link.href;
               return (
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => {
-                    if (link.href.startsWith("#")) setActiveSection(link.href.slice(1));
-                  }}
                   className={`px-3 py-1.5 rounded-full transition-all duration-200 ${
                     isActive
                       ? "bg-emerald-400/10 text-emerald-500 dark:text-emerald-400 font-semibold"
@@ -114,15 +118,14 @@ export default function Navbar() {
             <div className="absolute -inset-x-4 top-[calc(100%+0.75rem)] z-50 rounded-2xl bg-white dark:bg-[#0b0f17] border border-gray-200 dark:border-slate-800/60 p-4 shadow-xl md:hidden">
               <div className="space-y-1">
                 {NAV_LINKS.map((link) => {
-                  const isActive = activeSection === link.href.slice(1);
+                  const isActive = link.href.includes("#")
+                    ? activeSection === link.href.split("#")[1]
+                    : pathname === link.href;
                   return (
                     <a
                       key={link.href}
                       href={link.href}
-                      onClick={() => {
-                        setMenuOpen(false);
-                        if (link.href.startsWith("#")) setActiveSection(link.href.slice(1));
-                      }}
+                      onClick={() => setMenuOpen(false)}
                       className={`block rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200 ${
                         isActive
                           ? "bg-emerald-400/10 text-emerald-500 dark:text-emerald-400 font-semibold"

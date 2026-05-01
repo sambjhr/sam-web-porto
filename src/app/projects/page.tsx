@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import ProjectCard from "@/components/ProjectCard";
 import { PROJECTS } from "@/data/projects";
+import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "All Projects — Samuel Haposan",
@@ -40,6 +41,8 @@ export default function ProjectsPage() {
           ))}
         </div>
       </div>
+
+      <Footer />
     </main>
   );
 }
