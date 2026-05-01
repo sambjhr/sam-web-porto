@@ -29,7 +29,7 @@ const EXPERIENCES: ExpItem[] = [
       "Led system flow and database design for a mobile-based PNS Attendance System (iOS & Android), and developed an end-to-end Asset Management Information System (JavaScript, PostgreSQL) covering backend logic and frontend implementation.",
     ],
     skills:
-      "Full-Stack Development · System Design · Project Management · React · Node.js · PostgreSQL · AWS · GitHub Actions · Agile Methodologies",
+      "Full-Stack Development · System Design · Project Management · React · Node.js · PostgreSQL · GitHub Actions · Agile Methodologies",
   },
   {
     id: 2,
