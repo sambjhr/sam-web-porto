@@ -5,11 +5,11 @@ import { Menu, X, Moon, Sun } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
 const NAV_LINKS = [
-  { href: "#about", label: "About Me" },
-  { href: "#skills", label: "Skills" },
+  { href: "/#about", label: "About Me" },
+  { href: "/#skills", label: "Skills" },
   { href: "/projects", label: "Project" },
-  { href: "#experience", label: "Work" },
-  { href: "#testimonials", label: "Testimonials" },
+  { href: "/#experience", label: "Work" },
+  { href: "/#testimonials", label: "Testimonials" },
 ];
 
 export default function Navbar() {
