@@ -48,7 +48,7 @@ export default function About() {
         <div className="md:col-span-2">
           <div className="relative group">
             <img
-              src="/pic/IMG_9253.jpg"
+              src="/pic/abtme2.png"
               alt="Samuel about"
               className="w-full rounded-2xl object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
             />

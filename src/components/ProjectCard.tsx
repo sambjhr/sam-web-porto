@@ -1,9 +1,17 @@
+import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { type ProjectItem, TAG_COLORS, TYPE_BADGE } from "@/data/projects";
 
 export default function ProjectCard({ p }: { p: ProjectItem }) {
   return (
-    <article className="group flex flex-col rounded-2xl bg-white dark:bg-[#0b1220] border border-gray-200 dark:border-slate-700/55 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-gray-300 dark:hover:border-slate-600/70 hover:shadow-[0_16px_40px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_16px_40px_rgba(2,6,23,0.5)]">
+    <article className="group relative flex flex-col rounded-2xl bg-white dark:bg-[#0b1220] border border-gray-200 dark:border-slate-700/55 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-gray-300 dark:hover:border-slate-600/70 hover:shadow-[0_16px_40px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_16px_40px_rgba(2,6,23,0.5)]">
+      {/* Stretched link: whole card navigates to the detail page */}
+      <Link
+        href={`/projects/${p.slug}`}
+        aria-label={`View details for ${p.title}`}
+        className="absolute inset-0 z-10"
+      />
+
       {/* Image */}
       <div className="relative overflow-hidden">
         <img
@@ -44,7 +52,7 @@ export default function ProjectCard({ p }: { p: ProjectItem }) {
               href={p.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="shrink-0 flex items-center gap-1.5 text-gr-small text-emerald-500 dark:text-emerald-400 hover:text-emerald-400 dark:hover:text-emerald-300 transition-colors"
+              className="relative z-20 shrink-0 flex items-center gap-1.5 text-gr-small text-emerald-500 dark:text-emerald-400 hover:text-emerald-400 dark:hover:text-emerald-300 transition-colors"
             >
               Live demo <ExternalLink size={14} />
             </a>

@@ -6,8 +6,31 @@ export type Tech = {
   color: TagColor;
 };
 
+export type ProjectImage = {
+  src: string;
+  caption?: string;
+};
+
+export type ProjectSection = {
+  heading: string;
+  items: string[];
+};
+
+export type ProjectDetail = {
+  /** Longer intro paragraph(s) shown at the top of the detail page. */
+  summary?: string;
+  role?: string;
+  /** Free-text full tech stack line, e.g. "Next.js · Tailwind · Prisma". */
+  techStack?: string;
+  /** Sections such as "Fitur utama" or "Sorotan teknis". */
+  sections?: ProjectSection[];
+  /** Extra images to illustrate parts of the project. */
+  gallery?: ProjectImage[];
+};
+
 export type ProjectItem = {
   id: number;
+  slug: string;
   title: string;
   org: string;
   type: ProjectType;
@@ -15,6 +38,7 @@ export type ProjectItem = {
   img: string;
   tech: Tech[];
   url?: string;
+  detail?: ProjectDetail;
 };
 
 export const TAG_COLORS: Record<TagColor, string> = {
@@ -37,7 +61,50 @@ export function screenshotUrl(siteUrl: string) {
 
 export const PROJECTS: ProjectItem[] = [
   {
+    id: 2,
+    slug: "online-exam-system",
+    title: "Online Exam System for Civil Servants",
+    org: "BKPSDM, Kutai Kartanegara",
+    type: "Freelance",
+    desc: "Fullstack developer for a web-based examination system for the Kutai Kartanegara Regency HR Agency (BKPSDM) to evaluate civil servants' (ASN) understanding of the training they complete. Built to support ~1.000 concurrent test-takers over a 5-hour window.",
+    img: "/pic/project/ujianonline.jpg",
+    tech: [
+      { name: "JavaScript",  color: "yellow" },
+      { name: "REST API",    color: "sky"    },
+      { name: "PostgreSQL",   color: "orange" },
+      { name: "Full-Stack",   color: "slate"  },
+      { name: "Dashboard",   color: "violet"  },
+    ],
+    url: "https://ujianonlinekukar.up.railway.app",
+    detail: {
+      summary:
+        "A web-based examination system for the Kutai Kartanegara Regency HR Agency (BKPSDM) to evaluate civil servants' (ASN) understanding of the training they complete. Built to support ~2000 concurrent test-takers",
+      role: "Full-stack Developer (database design, backend API, frontend, deployment).",
+      techStack:
+        "Next.js (App Router, React 19, TypeScript) · Tailwind CSS · Express.js · Prisma ORM · PostgreSQL · JWT auth.",
+      sections: [
+        {
+          heading: "Highlights",
+          items: [
+            "Multi-role access control (Super Admin / Class Admin / Teacher / Student) where a single account can hold several roles, with tiered permissions.",
+            "Academic management: classes & subjects (many-to-many), teacher/student exam management, and bulk user import via Excel/CSV.",
+            "Flexible exam builder: multiple-choice, true/false, and essay questions; a randomized question bank (e.g. draw 50 of 100 per attempt) and bulk CSV question import.",
+            "Dynamic class-based assignment: assign exams to whole classes; newly added students are included automatically.",
+            "Exam anti-cheating lockdown: enforced fullscreen, auto-submit on tab/app switch, key & right-click blocking, screenshot detection, and a mandatory rules agreement.",
+            "Auto + manual grading, KKM-capped remedial attempts, and Excel score export.",
+            "Layered backend architecture (router → controller → service → DTO) with Prisma migrations for a complex relational schema.",
+          ],
+        },
+      ],
+      gallery: [
+        // Add images to illustrate each part, e.g.:
+        // { src: "/pic/project/online-exam/dashboard.png", caption: "Real-time monitoring dashboard" },
+      ],
+    },
+  },
+  {
     id: 1,
+    slug: "bangkom-lms",
     title: "BANGKOM Learning Management System",
     org: "BKPSDM, Kutai Kartanegara",
     type: "Government",
@@ -53,7 +120,25 @@ export const PROJECTS: ProjectItem[] = [
     url: "https://bangkom.kukarkab.go.id",
   },
   {
-    id: 2,
+    id: 3,
+    slug: "pelayanan-siswa-grii",
+    title: "Pelayanan Siswa GRII Samarinda",
+    org: "GRII Samarinda",
+    type: "Freelance",
+    desc: "Led end-to-end delivery of an LMS for civil servant competency development. Defined data models, coordinated a cross-functional team (analyst, programmers, DBA, security), integrated ASN personnel systems, and built real-time monitoring dashboards with role-based access control.",
+    img: "/pic/project/BangkomKukar.png",
+    tech: [
+      { name: "Prisma ORM",  color: "sky"    },
+      { name: "JavaScript",  color: "yellow" },
+      { name: "REST API",    color: "sky"    },
+      { name: "RBAC",        color: "violet" },
+      { name: "Dashboard",   color: "slate"  },
+    ],
+    url: "https://bangkom.kukarkab.go.id",
+  },
+  {
+    id: 4,
+    slug: "praktis-attendance",
     title: "PRAKTIS — Integrated ASN Attendance System",
     org: "Kutai Kartanegara Regency Government",
     type: "Government",
@@ -69,7 +154,8 @@ export const PROJECTS: ProjectItem[] = [
     url: "https://praktis.kukarkab.go.id",
   },
   {
-    id: 3,
+    id: 5,
+    slug: "laundry-web-app",
     title: "Laundry Web App",
     org: "Purwadhika Final Project",
     type: "Education",
@@ -85,7 +171,8 @@ export const PROJECTS: ProjectItem[] = [
     url: "https://finpro-fe.vercel.app",
   },
   {
-    id: 4,
+    id: 6,
+    slug: "simasos",
     title: "SIMASOS — Public Complaint Reporting System",
     org: "Dinas Sosial, Kutai Kartanegara",
     type: "Government",
@@ -99,7 +186,8 @@ export const PROJECTS: ProjectItem[] = [
     ],
   },
   {
-    id: 5,
+    id: 7,
+    slug: "asset-management-system",
     title: "Asset Management Information System",
     org: "Freelance Project",
     type: "Freelance",
@@ -114,3 +202,7 @@ export const PROJECTS: ProjectItem[] = [
     ],
   },
 ];
+
+export function getProjectBySlug(slug: string): ProjectItem | undefined {
+  return PROJECTS.find((p) => p.slug === slug);
+}
