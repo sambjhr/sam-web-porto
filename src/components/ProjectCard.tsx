@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
-import { type ProjectItem, TAG_COLORS, TYPE_BADGE } from "@/data/projects";
+import { type ProjectItem, TAG_COLORS, TYPE_BADGE, formatPeriod } from "@/data/projects";
 
 export default function ProjectCard({ p }: { p: ProjectItem }) {
   return (
@@ -30,7 +30,11 @@ export default function ProjectCard({ p }: { p: ProjectItem }) {
       <div className="flex flex-col flex-1 gap-3 p-5">
         <div>
           <h4 className="text-gr-subtitle font-semibold text-gray-900 dark:text-slate-100 leading-snug">{p.title}</h4>
-          <p className="mt-0.5 text-gr-caption text-emerald-500 dark:text-emerald-400/80">{p.org}</p>
+          <p className="mt-0.5 flex flex-wrap items-center gap-x-2 text-gr-caption text-emerald-500 dark:text-emerald-400/80">
+            <span>{p.org}</span>
+            <span className="text-gray-400 dark:text-slate-500">·</span>
+            <span className="text-gray-500 dark:text-slate-400">{formatPeriod(p)}</span>
+          </p>
         </div>
 
         <p className="text-gr-body text-gray-500 dark:text-slate-400 leading-relaxed flex-1">{p.desc}</p>

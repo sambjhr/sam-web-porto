@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, CalendarDays, ExternalLink } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { PROJECTS, getProjectBySlug, TAG_COLORS, TYPE_BADGE } from "@/data/projects";
+import { PROJECTS, getProjectBySlug, TAG_COLORS, TYPE_BADGE, formatPeriod } from "@/data/projects";
 
 export function generateStaticParams() {
   return PROJECTS.map((p) => ({ slug: p.slug }));
@@ -37,6 +37,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             {type}
           </span>
           <span className="text-gr-caption text-emerald-500 dark:text-emerald-400/80">{org}</span>
+          <span className="inline-flex items-center gap-1.5 text-gr-caption text-gray-500 dark:text-slate-400">
+            <CalendarDays size={13} /> {formatPeriod(project)}
+          </span>
 
           <Link
             href="/projects"
