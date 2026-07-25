@@ -67,7 +67,7 @@ export const PROJECTS: ProjectItem[] = [
     org: "BKPSDM, Kutai Kartanegara",
     type: "Freelance",
     desc: "Fullstack developer for a web-based examination system for the Kutai Kartanegara Regency HR Agency (BKPSDM) to evaluate civil servants' (ASN) understanding of the training they complete. Built to support ~1.000 concurrent test-takers over a 5-hour window.",
-    img: "/pic/project/ujianonline.jpg",
+    img: screenshotUrl("https://ujianonlinekukar.up.railway.app"),
     tech: [
       { name: "JavaScript",  color: "yellow" },
       { name: "REST API",    color: "sky"    },
@@ -78,21 +78,23 @@ export const PROJECTS: ProjectItem[] = [
     url: "https://ujianonlinekukar.up.railway.app",
     detail: {
       summary:
-        "A web-based examination system for the Kutai Kartanegara Regency HR Agency (BKPSDM) to evaluate civil servants' (ASN) understanding of the training they complete. Built to support ~2000 concurrent test-takers",
+        "A web-based examination platform for the Kutai Kartanegara Regency HR Agency (BKPSDM) used to measure civil servants' (ASN) understanding of the training and diklat they complete — covering pre-test, post-test, and selection. Split into a Next.js frontend and an Express REST API, with server-side integrity enforcement.",
       role: "Full-stack Developer (database design, backend API, frontend, deployment).",
       techStack:
-        "Next.js (App Router, React 19, TypeScript) · Tailwind CSS · Express.js · Prisma ORM · PostgreSQL · JWT auth.",
+        "Next.js (App Router, React, TypeScript) · Tailwind CSS · Lucide · Node.js / Express · Prisma ORM · PostgreSQL · JWT auth · Zod validation · Helmet, CORS, rate limiting, bcrypt.",
       sections: [
         {
           heading: "Highlights",
           items: [
-            "Multi-role access control (Super Admin / Class Admin / Teacher / Student) where a single account can hold several roles, with tiered permissions.",
-            "Academic management: classes & subjects (many-to-many), teacher/student exam management, and bulk user import via Excel/CSV.",
-            "Flexible exam builder: multiple-choice, true/false, and essay questions; a randomized question bank (e.g. draw 50 of 100 per attempt) and bulk CSV question import.",
-            "Dynamic class-based assignment: assign exams to whole classes; newly added students are included automatically.",
-            "Exam anti-cheating lockdown: enforced fullscreen, auto-submit on tab/app switch, key & right-click blocking, screenshot detection, and a mandatory rules agreement.",
-            "Auto + manual grading, KKM-capped remedial attempts, and Excel score export.",
-            "Layered backend architecture (router → controller → service → DTO) with Prisma migrations for a complex relational schema.",
+            "Multi-role access control (Super Admin / Admin / Teacher / Student) where a single account can hold several roles; accounts are provisioned by admins, including bulk import from a file.",
+            "Academic management: classes & subjects (diklat), participant grouping, and teacher assignment.",
+            "Exam builder for multiple-choice, true/false, and essay questions — with images on both the question and the answer options, and per-question scoring.",
+            "Reusable question bank shared across many exams without duplicating data; questions can be drawn across banks with scores set per exam.",
+            "Randomization of question order, answer-option order, and partial question draws — different for each participant.",
+            "Scheduling & security: exam password with timed reveal, open/start/close windows (WITA), open-book mode, and a large-format password display for projecting to a class.",
+            "Grading: objective questions auto-scored, essays graded manually; rankings, KKM achievement, remedial, and Excel export.",
+            "Server-side integrity: exam time computed on the server (WITA), violation logging, and session control.",
+            "Resilient exam-taking: countdown timer with auto-submit, question navigation, and automatic answer saving that survives connection drops.",
           ],
         },
       ],
@@ -121,20 +123,44 @@ export const PROJECTS: ProjectItem[] = [
   },
   {
     id: 3,
-    slug: "pelayanan-siswa-grii",
-    title: "Pelayanan Siswa GRII Samarinda",
+    slug: "pelsis-grii-samarinda",
+    title: "Portal Pelayanan Sekolah GRII Samarinda",
     org: "GRII Samarinda",
     type: "Freelance",
-    desc: "Led end-to-end delivery of an LMS for civil servant competency development. Defined data models, coordinated a cross-functional team (analyst, programmers, DBA, security), integrated ASN personnel systems, and built real-time monitoring dashboards with role-based access control.",
-    img: "/pic/project/BangkomKukar.png",
+    desc: "Full-stack school-ministry portal that lets volunteer teachers report their weekly teaching activities across partner schools, tracks how many students are reached, and gives coordinators a single dashboard over the whole ministry. Includes role-based access, photo-backed activity reports, and regional KKR scheduling.",
+    img: screenshotUrl("https://pelsis-grii-samarinda.up.railway.app"),
     tech: [
-      { name: "Prisma ORM",  color: "sky"    },
-      { name: "JavaScript",  color: "yellow" },
-      { name: "REST API",    color: "sky"    },
-      { name: "RBAC",        color: "violet" },
-      { name: "Dashboard",   color: "slate"  },
+      { name: "TypeScript",     color: "sky"    },
+      { name: "Next.js",        color: "yellow" },
+      { name: "TanStack Query", color: "violet" },
+      { name: "PostgreSQL",     color: "orange" },
+      { name: "Full-Stack",     color: "slate"  },
     ],
-    url: "https://bangkom.kukarkab.go.id",
+    url: "https://pelsis-grii-samarinda.up.railway.app",
+    detail: {
+      summary:
+        "A centralized portal supporting GRII Samarinda's education ministry across schools around the city. Volunteer teachers teach at different schools each week; the portal is where they check their schedule and materials, file activity reports with supporting photos, and where coordinators get a full picture of how many students are being reached — all in one place. Built as a Next.js frontend and an Express REST API.",
+      role: "Full-stack Developer (data modeling, backend API, frontend, deployment).",
+      techStack:
+        "Next.js (React, TypeScript) · Tailwind CSS · NextAuth · TanStack Query · Node.js / Express · Prisma ORM · PostgreSQL · JWT auth.",
+      sections: [
+        {
+          heading: "Highlights",
+          items: [
+            "Role-based access (Teacher / Admin / Super Admin) where a single user can hold multiple roles and switch views.",
+            "Teacher schedule & materials: the schools, times, and lesson materials each teacher is assigned to.",
+            "Activity reporting: teachers submit reports with photos uploaded directly from their device; admins review and validate them.",
+            "Activity history: an archive of every report a teacher has submitted.",
+            "Admin management of schools, materials, and teacher assignments (school, subject, and time).",
+            "Regional KKR (Kebaktian Kebangunan Rohani) dashboard for scheduling and recapping cross-school spiritual programs.",
+            "Super-admin user management and account validation.",
+            "Statistics & charts summarizing students reached and their distribution per school.",
+            "Search and pagination across listings for easy navigation.",
+            "Layered backend architecture (router → controller → service) with secure photo upload and storage.",
+          ],
+        },
+      ],
+    },
   },
   {
     id: 4,
@@ -143,7 +169,7 @@ export const PROJECTS: ProjectItem[] = [
     org: "Kutai Kartanegara Regency Government",
     type: "Government",
     desc: "Led development of a multi-platform attendance system with face recognition and offline mode. Delivered on Web, Android, and iOS within a 60-day timeline. Integrated with e-Kinerja BKN webservice; adopted across government units for improved ASN discipline tracking.",
-    img: "/pic/project/Praktis.png",
+    img: screenshotUrl("https://praktis.kukarkab.go.id/user"),
     tech: [
       { name: "JavaScript",       color: "yellow" },
       { name: "Face Recognition", color: "violet" },
