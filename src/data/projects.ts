@@ -93,7 +93,7 @@ const PROJECT_LIST: ProjectItem[] = [
     type: "Education",
     start: "2026-05",
     end: "2026-07",
-    desc: "Online exam platform for high-school students preparing for the PKN STAN entrance selection. Scheduled exams with server-side integrity enforcement, a reusable question bank, automatic scoring, and ranked score recaps — built solo from scratch as two separate repositories (frontend & backend).",
+    desc: "Online exam platform for high-school students preparing for the PKN STAN entrance selection. Scheduled exams with server-side integrity enforcement, a reusable question bank, automatic scoring, and ranked score recaps — built solo from scratch.",
     img: screenshotUrl("https://tryout-binlat-stan.up.railway.app"),
     tech: [
       { name: "Next.js 16", color: "yellow" },
