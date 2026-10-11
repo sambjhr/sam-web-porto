@@ -271,7 +271,7 @@ const PROJECT_LIST: ProjectItem[] = [
     start: "2025-09",
     end: "2025-11",
     desc: "Led development of a multi-platform attendance system with face recognition and offline mode. Delivered on Web, Android, and iOS within a 60-day timeline. Integrated with e-Kinerja BKN webservice; adopted across government units for improved ASN discipline tracking.",
-    img: screenshotUrl("https://praktis.kukarkab.go.id/user"),
+    img: screenshotUrl("https://praktis-ng.kukarkab.go.id/user"),
     tech: [
       { name: "JavaScript",       color: "yellow" },
       { name: "Face Recognition", color: "violet" },
@@ -279,7 +279,7 @@ const PROJECT_LIST: ProjectItem[] = [
       { name: "e-Kinerja BKN",    color: "slate"  },
       { name: "Offline Mode",     color: "slate"  },
     ],
-    url: "https://praktis.kukarkab.go.id",
+    url: "https://praktis-ng.kukarkab.go.id",
   },
   {
     id: 5,

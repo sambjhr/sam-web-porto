@@ -26,6 +26,7 @@ const EXPERIENCES: ExpItem[] = [
     bullets: [
       "Designed and developed a workflow-driven Public Complaint Reporting System for Dinas Sosial,translating business requirements into structured system flows and database architecture.",
       "Built BANGKOM Learning Management System for Kutai Kartanegara using Prisma ORM, designing system flow and database architecture for competency development, certification management, and user tracking.",
+      "Developed Ujian Online Kukar, a web-based assessment platform (Next.js, Prisma), as the sole full-stack developer — standardizing pre-/post-tests across ASN competency development programs, and later adopted beyond BKPSDM for village facilitator (pendamping desa) recruitment and other agencies’ training.",
       "Led system flow and database design for a mobile-based PNS Attendance System (iOS & Android), and developed an end-to-end Asset Management Information System (JavaScript, PostgreSQL) covering backend logic and frontend implementation.",
     ],
     skills:
