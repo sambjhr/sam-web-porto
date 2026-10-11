@@ -1,4 +1,9 @@
 import { GraduationCap, Briefcase, Code2, Target } from "lucide-react";
+import {
+  FREELANCE_START_YEAR,
+  PROJECTS_DELIVERED,
+  STUDENTS_TRAINED_LABEL,
+} from "../data/stats";
 
 const HIGHLIGHTS = [
   {
@@ -14,7 +19,7 @@ const HIGHLIGHTS = [
   {
     icon: Code2,
     label: "Developer Since",
-    detail: "2023 · 4+ IT projects delivered",
+    detail: `${FREELANCE_START_YEAR} · ${PROJECTS_DELIVERED}+ IT projects delivered`,
   },
   {
     icon: Target,
@@ -26,7 +31,7 @@ const HIGHLIGHTS = [
 const TAGS = [
   "Full-Stack Dev",
   "Business Analyst",
-  "2,500+ Students Trained",
+  `${STUDENTS_TRAINED_LABEL} Students Trained`,
   "Government Tech",
   "Data-Driven",
 ];

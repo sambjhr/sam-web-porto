@@ -2,7 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { useTheme } from "./ThemeProvider";
-import { PROJECTS } from "../data/projects";
+import {
+  YEARS_FREELANCING,
+  STUDENTS_TRAINED_LABEL,
+  GPA,
+  PROJECTS_DELIVERED,
+} from "../data/stats";
 
 const ROLES = [
   "Full-Stack Web Developer",
@@ -10,14 +15,11 @@ const ROLES = [
   "Education Facilitator",
 ];
 
-const FREELANCE_START_YEAR = 2023;
-const yearsFreelancing = new Date().getFullYear() - FREELANCE_START_YEAR;
-
 const STATS = [
-  { value: `${yearsFreelancing}+`, label: "Years Freelancing" },
-  { value: "3,5k+", label: "Students Trained" },
-  { value: "3.78", label: "GPA — BINUS" },
-  { value: `${PROJECTS.length}+`, label: "IT Projects Delivered" },
+  { value: `${YEARS_FREELANCING}+`, label: "Years Freelancing" },
+  { value: STUDENTS_TRAINED_LABEL, label: "Students Trained" },
+  { value: GPA, label: "GPA — BINUS" },
+  { value: `${PROJECTS_DELIVERED}+`, label: "IT Projects Delivered" },
 ];
 
 function LinkedInIcon() {
